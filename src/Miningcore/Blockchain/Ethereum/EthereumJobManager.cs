@@ -444,16 +444,35 @@ namespace Miningcore.Blockchain.Ethereum
             logger.LogInvoke(new[] { worker.ConnectionId });
             var context = worker.ContextAs<EthereumWorkerContext>();
 
-            // var miner = request[0];
-            var jobId = request[1];
-            var nonce = request[2];
             EthereumJob job;
-
-            // stale?
-            lock(jobLock)
+            string miner, jobId, nonce = string.Empty;
+            if(context.IsNiceHashClient)
             {
-                if(!validJobs.TryGetValue(jobId, out job))
-                    throw new StratumException(StratumError.MinusOne, "stale share");
+                jobId = request[1];
+                nonce = request[2];
+                miner = request[0];
+
+                lock(jobLock)
+                {
+                    var jobResult = validJobs.Where(x => x.Value.Id == jobId).FirstOrDefault();
+                    if(jobResult.Value == null)
+                        throw new StratumException(StratumError.MinusOne, "stale share");
+                    job = jobResult.Value;
+                }
+            }
+
+            else
+            {
+                jobId = request[1];
+                nonce = request[0];
+
+                lock(jobLock)
+                {
+                    var jobResult = validJobs.Where(x => x.Value.BlockTemplate.Header == jobId).FirstOrDefault();
+                    if(jobResult.Value == null)
+                        throw new StratumException(StratumError.MinusOne, "stale share");
+                    job = jobResult.Value;
+                }
             }
 
             // validate & process

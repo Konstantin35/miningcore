@@ -18,6 +18,7 @@ namespace Miningcore.Blockchain.Ethereum
         public const string EthereumStratumVersion = "EthereumStratum/1.0.0";
         public const decimal StaticTransactionFeeReserve = 0.0025m; // in ETH
         public const string BlockTypeUncle = "uncle";
+        public static double StratumDiffFactor = 4294901760.0;
 
 #if !DEBUG
         public const int MinPayoutPeerCount = 1;
