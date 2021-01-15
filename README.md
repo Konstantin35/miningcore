@@ -1,7 +1,4 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/nbvaa55gu3icd1q8?svg=true)](https://ci.appveyor.com/project/oliverw/miningcore)
-[![Docker Build Statu](https://img.shields.io/docker/build/coinfoundry/miningcore-docker.svg)](https://hub.docker.com/r/coinfoundry/miningcore-docker/)
-[![Docker Stars](https://img.shields.io/docker/stars/coinfoundry/miningcore-docker.svg)](https://hub.docker.com/r/coinfoundry/miningcore-docker/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/coinfoundry/miningcore-docker.svg)]()
+[![Build status](https://ci.appveyor.com/api/projects/status/j7y6w2xllpu84pg7?svg=true)](https://ci.appveyor.com/project/Konstantin35/miningcore-lk7em)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
 
 ### Features
@@ -29,6 +26,8 @@ Miningcore implements the [Ethereum stratum mining protocol](https://github.com/
 
 - Claymore Miner must be configured to communicate using this protocol by supplying the <code>-esm 3</code> command line option
 - Genoil's ethminer must be configured to communicate using this protocol by supplying the <code>-SP 2</code> command line option
+
+[Stratum-Proxy Mining protocol](https://github.com/sammy007/open-ethereum-pool/blob/master/docs/STRATUM.md). This protocol is implemented by all major Ethereum miners.
 
 #### ZCash
 
