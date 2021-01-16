@@ -53,9 +53,9 @@ namespace Miningcore.Persistence.Postgres.Repositories
 
             var mapped = mapper.Map<Entities.PoolStats>(stats);
 
-            const string query = "INSERT INTO poolstats(poolid, connectedminers, poolhashrate, networkhashrate, " +
+            const string query = "INSERT INTO poolstats(poolid, connectedminers, connectedworkers, poolhashrate, networkhashrate, " +
                 "networkdifficulty, lastnetworkblocktime, blockheight, connectedpeers, sharespersecond, created) " +
-                "VALUES(@poolid, @connectedminers, @poolhashrate, @networkhashrate, @networkdifficulty, " +
+                "VALUES(@poolid, @connectedminers, @connectedworkers, @poolhashrate, @networkhashrate, @networkdifficulty, " +
                 "@lastnetworkblocktime, @blockheight, @connectedpeers, @sharespersecond, @created)";
 
             await con.ExecuteAsync(query, mapped, tx);

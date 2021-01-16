@@ -142,6 +142,7 @@ namespace Miningcore.Mining
                     cf.Run(con => shareRepo.GetHashAccumulationBetweenCreatedAsync(con, poolId, target, start)));
 
                 var byMiner = result.GroupBy(x => x.Miner).ToArray();
+                var byWorker = result.GroupBy(x => x.Worker).ToArray();
 
                 if(result.Length > 0)
                 {
@@ -156,6 +157,7 @@ namespace Miningcore.Mining
 
                         // update
                         pool.PoolStats.ConnectedMiners = byMiner.Length;
+                        pool.PoolStats.ConnectedWorkers = byWorker.Length;
                         pool.PoolStats.PoolHashrate = (ulong) Math.Ceiling(poolHashrate);
                         pool.PoolStats.SharesPerSecond = (int) (poolHashesCountAccumulated / windowActual);
 
@@ -167,6 +169,7 @@ namespace Miningcore.Mining
                 {
                     // reset
                     pool.PoolStats.ConnectedMiners = 0;
+                    pool.PoolStats.ConnectedWorkers = 0;
                     pool.PoolStats.PoolHashrate = 0;
                     pool.PoolStats.SharesPerSecond = 0;
 
